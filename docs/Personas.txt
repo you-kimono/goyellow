@@ -1,0 +1,30 @@
+Name:
+  Emma.
+Details:
+  Woman, 38 y.o., manager of a shopping mall.
+Goal:
+  Wants the shopping mall she manages to provide its customers with the best experience possible.
+
+Name:
+  Thomas.
+Details:
+  Man, 28 y.o., part-time student / web designer.
+  Always very busy and trying to schedule his tasks as efficiently as possible.
+Goal:
+  Wants to know working hours and service availability of the activities he visits beforehand.
+
+Name:
+  Shaun.
+Details:
+  Man, 28 y.o., hairdresser, fond of technology. Owns a barber shop.
+Goal:
+  Wants to have control over the contact info for his customers.
+  Wants the booking handled without him being constantly interrupted.
+
+Name:
+  Alice.
+Details:
+  Woman, 34 y.o., has to divide herself between her work, her family, and her hobbies.
+  Very busy and always on the run.
+Goal:
+  Wants to know contacts and working hours of the places she plans to visit.

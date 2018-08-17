@@ -1,0 +1,286 @@
+
+[0]
+As Any User,
+I want the webpages to be as intuitive as possible,
+So that I can easily find what I am looking for.
+
+Feature: Pages show a "search" bar
+
+  Scenario 1: Homepage shows the search bar for a registered user
+    Given I'm a registered user
+    when I open the search page
+    then the page displays a search bar
+
+  Scenario 2: Homepage shows the search bar for a guest user
+    Given I'm a guest, not-registered user
+    when I open the homepage
+    then the page displays a search bar
+
+  Scenario 3: Every page shows a search button for a registered user
+    Given I'm a registered user
+    when I open Any page
+    then the page displays a search icon in the header
+
+  Scenario 4: Every page shows a search button for a guest user
+    Given I'm a guest user
+    when I open Any page
+    then the page displays a search icon in the header
+
+  Scenario 5: Click on the search icon opens the search bar
+    Given I'm a registered user
+    when I click on the search icon
+    then the page displays the search bar
+
+  Scenario 6: Click on the search icon opens the search bar for a guest user
+    Given I'm a guest user
+    when I click on the search icon
+    then the page displays the search bar
+
+[1]
+As Alice,
+I want to search for a drugstore close to my working place,
+So that I know whether it is open or not during my lunch break.
+
+Feature: Search an enterprise by enterprise type.
+
+  Scenario 1: Search by enterprise type.
+    Given there are three drugstores
+    and there are two hairdressers
+    when I search for a drugstore
+    then the results should contain three drugstores
+    and no hairdresser
+
+  Scenario 2: Search by enterprise type with location enabled.
+    Given there are three drugstores
+    and there are two hairdressers
+    and yellow knows my location
+    when I search for a drugstores
+    then the results should contain only three drugstores
+    and the results should be ordered by ascending distance from my position
+
+  Scenario 3: Search by enterprise type with location disabled.
+    Given there are three drugstores
+    and there are two hairdressers
+    and yellow does not know my location
+    when I search for a drugstore
+    then the results should contain only three drugstores
+    and the results should be ordered by name
+
+Feature: Display an enterprise's details page.
+
+  Scenario 1: Open the enterprise's details page.
+    Given I searched for an enterprise
+    and the search had results
+    when I click on one of the results
+    then I see the details of the enterprise I clicked on
+
+Feature: Consult the working hours in an enterprise's details page.
+
+  Scenario 1: Working hours have not been set.
+    Given I opened the details page of an enterprise
+    and the enterprise's owner did not set the working hours
+    then I see '-' in the working hours field
+
+  Scenario 2: Working hours have been set.
+    Given I opened the details page of an enterprise
+    and the enterprise's owner did set the working hours
+    then I see the correct working hours
+
+Feature: Search text must be at least 3 characters long
+
+  Scenario 1: Search text is less than 3 characters
+    Given no preconditions
+    when I input 2 characters in the search box
+    then the search yields no results
+    and a message informs me to input at least 3 characters
+
+  Scenario 2: Search text is exactly 3 characters
+    Given no preconditions
+    when I input 3 characters in the search box
+    then the search should yield the expected results
+
+[2]
+As Alice,
+I want to search for the shop called "a name",
+So that I know its telephone number.
+
+Feature: Search by enterprise name
+
+  Scenario 1: Search by enterprise name using a name that exists
+    Given there is an enterprise with name "a name"
+    when I search for an enterprise named "a name"
+    then I see the details page of the enterprise name "a name"
+
+  Scenario 2: Search by enterprise name using a name that does not exists
+    Give there is no enterprise with name "a name"
+    when I search for an enterprise named "a name"
+    then the results should be ordered by distance from the name I searched for.
+
+Feature: Consult the phone number in an enterprise's details page.
+
+  Scenario 1: Phone number has not been set.
+    Given I opened the details page of an enterprise
+    and the enterprise's owner did not set the phone number
+    then I see '-' in the phone number field
+
+  Scenario 2: Phone number has been set.
+    Given I opened the details page of an enterprise
+    and the enterprise's owner did set the phone number
+    then I see the correct phone number
+
+[3]
+As Shaun,
+I want to update the contacts of my shop,
+So that my clients can call me even if I just changed my phone number.
+
+Feature: Modify an enterprise's details
+
+  Scenario 1: Owner visits the enterprise's details page
+    Given I'm the enterprise's owner
+    when I visit the details page of my enterprise
+    then the page displays the "update" button
+
+  Scenario 2: Non-owner visits the enterprise's details page
+    Given I'm not the enterprise's owner
+    when I visit the details page
+    then the page does not display the "update" button
+
+  Scenario 3: Owner opens the enterprise's details update page
+    Given I'm the enterprise's owner
+    when I click on the "update" button
+    then I see the "modify details" page
+
+  Scenario 4: Modify details page shows the current details
+    Given I'm on the modify details page
+    then in an input field I see the details that are currently set
+
+  Scenario 5: Modify details page shows a save button
+    Given I'm on the modify details page
+    then I see a save button
+
+  Scenario 6: Modify details page shows a cancel button
+    Given I'm on the modify details page
+    then I see a cancel button
+
+  Scenario 7: Cancel button on modify details page undoes the changes
+    Given I'm on the modify details page
+    when I click on the cancel button
+    then I see the current details in the input boxes
+
+  Scenario 8: Save button on modify details page saves changes
+    Given
+
+
+[4]
+As Shaun,
+I want to update the working hours of my shop,
+So that my clients know that the shop is open even on Monday and Sunday during the holidays season.
+
+[5]
+As Shaun,
+I want to offer online booking,
+So that my clients know when I am available without having to call the shop.
+
+[6]
+As Thomas,
+I want to book an appointment from the web,
+So that I can schedule it according to my other activities.
+
+[7]
+As Thomas,
+I want to browse all the plumbers available in my city,
+So that I know which one is close to my apartment and works when I'm home.
+
+[8]
+As Emma,
+I want to group all the activities in the shopping mall that I manage,
+So that clients are always informed about them.
+
+[9]
+As Alice,
+I want to search for all other drugstores,
+So that I can find an open one when the one I searched for is closed.
+
+[10]
+As Thomas,
+I want to know if a given shopping mall contains the shop that I look for,
+So that I can decide whether to go there or not.
+
+[11]
+As Thomas,
+I want to know in which shopping malls is the shop that I am looking for,
+So that I can decide where to go.
+
+[12]
+As Thomas,
+I want to know if the ice-cream shop close to my apartment makes deliveries,
+So that I can decide whether to go there or call them.
+
+[13]
+As Shaun,
+I want to sign in using my facebook account,
+So that I don't have to remember new credentials.
+
+[14]
+As Alice,
+I want to use the system without having to register,
+So that I don't have to bother with registration/account details.
+
+[15]
+As Thomas,
+I want to sign in and log in using my google account,
+So that I everything on my phone is already set up.
+
+[16]
+As Alice,
+I want to search for all beauty saloons that offer a manicure service.
+
+[17]
+As Thomas,
+I want to temporarily subscribe to an enterprise,
+So that I get a notification/email when they open.
+
+[18]
+As Thomas,
+I want to get a notification if something changes to one of my bookings,
+So that I can act accordingly.
+
+[19]
+As Shaun,
+I want to be able to cancel a booking,
+So that I can inform my customer that there has been some problem.
+
+[20]
+As Shaun,
+I want to be able to suggest a change to one booking,
+So that my customer and I can agree on a new date that works for both of us.
+
+[21]
+As Thomas,
+I want to be able to send a private message to an enterprise,
+So that I can communicate with them.
+
+[22]
+As Thomas,
+I want to be able to see the history of all messages that I sent to/received from an enterprise,
+So that I can consult them.
+
+[23]
+As Thomas,
+I want to receive a notification when an enterprise sends me a message,
+So that I can always be informed.
+
+[24]
+As Thomas,
+I want to have my messages to an enterprise grouped together in a single chat,
+So that I can easily access them.
+
+[25]
+As Thomas,
+I want to be able to delete private messages sent to an enterprise,
+So that I can get rid of them.
+
+[26]
+As Thomas,
+I want to be able to delete entire conversations with an enterprise,
+So that I can get rid of them.
