@@ -2,8 +2,11 @@ from behave import *
 import unittest
 
 
-@given('there is an enterprise with name "{enterprise_name}" and id "{enterprise_id}"')
-def step_impl(context, enterprise_name, enterprise_id):
+@given('there is a set of enterprises')
+def step_impl(context):
+    for enterprise in context.table:
+        #make it add the enterprise to the database
+        pass
     pass
 
 
