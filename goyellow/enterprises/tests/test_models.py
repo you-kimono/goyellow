@@ -7,11 +7,11 @@ class EnterpriseModelTest(TestCase):
 
     def test_saving_and_retrieving_items(self):
         first_enterprise = Enterprise()
-        first_enterprise.name = 'first_enterprise'
+        first_enterprise.enterprise_name = 'first_enterprise'
         first_enterprise.save()
 
         second_enterprise = Enterprise()
-        second_enterprise.name = 'second_enterprise'
+        second_enterprise.enterprise_name = 'second_enterprise'
         second_enterprise.save()
 
         saved_enterprises = Enterprise.objects.all()
@@ -20,5 +20,10 @@ class EnterpriseModelTest(TestCase):
         first_saved_enterprise = saved_enterprises[0]
         second_saved_enterprise = saved_enterprises[1]
 
-        self.assertEqual(first_saved_enterprise.name, 'first_enterprise')
-        self.assertEqual(second_saved_enterprise.name, 'second_enterprise')
+        self.assertEqual(first_saved_enterprise.enterprise_name, 'first_enterprise')
+        self.assertEqual(second_saved_enterprise.enterprise_name, 'second_enterprise')
+
+    def test_name_label(self):
+        enterprise = Enterprise.objects.create(enterprise_name='enterprise_name')
+        field_label = enterprise._meta.get_field('enterprise_name').verbose_name
+        self.assertEquals(field_label, 'enterprise name')

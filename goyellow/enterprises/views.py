@@ -25,9 +25,9 @@ def details(request, pk):
 
 def new_enterprise(request):
     if request.method == 'POST':
-        name = request.POST['enterprise_name']
+        enterprise_name = request.POST['enterprise_name']
         enterprise = Enterprise()
-        enterprise.name = name
+        enterprise.enterprise_name = enterprise_name
         enterprise.save()
         return HttpResponseRedirect(reverse_lazy('enterprises:details', kwargs={'pk':enterprise.id}))
     return render(request, 'enterprises/new.html')

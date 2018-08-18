@@ -25,8 +25,8 @@ class IndexPageTest(TestCase):
     def setUp(self):
         self.name1 = 'enterprise1'
         self.name2 = 'enterprise2'
-        Enterprise.objects.create(name=self.name1)
-        Enterprise.objects.create(name=self.name2)
+        Enterprise.objects.create(enterprise_name=self.name1)
+        Enterprise.objects.create(enterprise_name=self.name2)
 
     def test_resolve_index_page(self):
         response = self.client.get(reverse_lazy('enterprises:index'))
@@ -50,8 +50,8 @@ class DetailsPageTest(TestCase):
     def setUp(self):
         self.name1 = 'enterprise1'
         self.name2 = 'enterprise2'
-        Enterprise.objects.create(name=self.name1)
-        Enterprise.objects.create(name=self.name2)
+        Enterprise.objects.create(enterprise_name=self.name1)
+        Enterprise.objects.create(enterprise_name=self.name2)
 
     def test_resolve_enterprises_details_page(self):
         response = self.client.get(reverse_lazy('enterprises:details', kwargs={'pk' : 1}))
@@ -127,7 +127,7 @@ class NewEnterprisePage(TestCase):
             }
         )
         enterprise = Enterprise.objects.first()
-        self.assertEqual(enterprise.name, 'my_new_enterprise')
+        self.assertEqual(enterprise.enterprise_name, 'my_new_enterprise')
 
     def test_new_redirects_after_POST(self):
         response = self.client.post(
