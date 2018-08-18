@@ -103,6 +103,13 @@ class NewEnterprisePage(TestCase):
         enterprises = Enterprise.objects.all()
         self.assertEqual(enterprises.count(), 1)
 
+    def test_new_does_not_save_a_GET_request(self):
+        response = self.client.get(
+            reverse_lazy('enterprises:new')
+        )
+        enterprises = Enterprise.objects.all()
+        self.assertEqual(enterprises.count(), 0)
+
     def test_new_enterprise_has_expected_name(self):
         response = self.client.post(
             reverse_lazy('enterprises:new'),
