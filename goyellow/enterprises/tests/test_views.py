@@ -93,15 +93,14 @@ class NewEnterprisePage(TestCase):
 
         self.assertTemplateUsed(response, 'enterprises/new.html')
 
-    @skip
-    def test_new_uses_correct_template_after_POST(self):
+    def test_new_redirects_to_details_after_POST(self):
         response = self.client.post(
             reverse_lazy('enterprises:new'),
             data={
                 'enterprise_name': 'my_new_enterprise'
             }
         )
-        self.assertTemplateUsed(response, 'enterprises/new.html')
+        self.assertEqual(response['location'], '/enterprises/1/')
 
     def test_new_can_save_a_POST_request(self):
         response = self.client.post(
