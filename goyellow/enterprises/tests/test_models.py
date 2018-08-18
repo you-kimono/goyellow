@@ -1,6 +1,7 @@
 from django.test import TestCase
 from ..models import Enterprise
 
+
 # Create your tests here.
 class EnterpriseModelTest(TestCase):
 

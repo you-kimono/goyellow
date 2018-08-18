@@ -5,7 +5,9 @@ import unittest
 @given('there is a set of enterprises')
 def step_impl(context):
     for enterprise in context.table:
-        #make it add the enterprise to the database
+        # db_enterprise = Enterprise()
+        # db_enterprise.name = enterprise.name
+        # db_enterprise.save()
         pass
     pass
 
