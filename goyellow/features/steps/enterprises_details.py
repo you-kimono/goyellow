@@ -25,3 +25,15 @@ def step_impl(context, enterprise_name):
     element = context.browser.find_element_by_id('enterprise_name')
     tc = unittest.TestCase('__init__')
     tc.assertEqual(enterprise_name, element.text)
+
+
+
+@when('I access the details of a non-existing enterprise')
+def step_impl(context):
+    context.browser.get(
+        'http://localhost:8000/enterprises/3'
+    )
+
+@then('I receive a response of 404')
+def step_impl(context):
+    assert 'Page not found' in context.browser.title

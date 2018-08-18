@@ -13,3 +13,8 @@ Feature: Display an enterprise's details page.
         |   enterprise_name             | enterprise_id     |
         |   test_enterprise             | 1                 |
         |   another_test_enterprise     | 2                 |
+
+  Scenario: The details page of a non-existing enterprise cannot be accessed
+    Given no preconditions
+    when I access the details of a non-existing enterprise
+    then I receive a response of 404

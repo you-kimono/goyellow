@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from .models import Enterprise
 
@@ -14,6 +15,6 @@ def index(request):
 
 
 def details(request, pk):
-    enterprise = Enterprise.objects.get(pk = pk)
+    enterprise = get_object_or_404(Enterprise, pk=pk)
     context = {'enterprise' : enterprise,}
     return render(request, 'enterprises/details.html', context)

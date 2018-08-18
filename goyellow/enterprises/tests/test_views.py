@@ -63,3 +63,8 @@ class DetailsPageTest(TestCase):
 
         self.assertContains(response1, self.name1)
         self.assertContains(response2, self.name2)
+
+    def test_details_of_missing_item_returns_404(self):
+        response = self.client.get(reverse_lazy('enterprises:details', kwargs={'pk': 3}))
+
+        self.assertEqual(response.status_code, 404)
