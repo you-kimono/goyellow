@@ -13,7 +13,7 @@ def enterprises_list(request):
     return render(request, 'enterprises/enterprises.html', context)
 
 
-def details(request, enterprise_id):
-    enterprise = Enterprise.objects.get(pk = enterprise_id)
+def details(request, pk):
+    enterprise = Enterprise.objects.get(pk = pk)
     context = {'enterprise' : enterprise,}
     return render(request, 'enterprises/details.html', context)

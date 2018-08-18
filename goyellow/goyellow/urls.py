@@ -18,8 +18,8 @@ from django.contrib import admin
 from enterprises import views
 
 urlpatterns = [
-#    url(r'^admin/', admin.site.urls),
+    # url(r'^admin/', admin.site.urls),
     url(r'^$', views.home_page, name="home"),
     url(r'^enterprises/$', views.enterprises_list, name="enterprises_list"),
-    url(r'^enterprises/(?P<enterprise_id>[0-9]+)/$', views.details, name="details"),
+    url(r'^enterprises/(?P<pk>\d+)/$', views.details, name="enterprises_details"),
 ]
