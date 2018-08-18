@@ -36,7 +36,7 @@ class DetailsPageTest(TestCase):
 
         self.assertTemplateUsed(response, 'enterprises/enterprises.html')
 
-    def test_display_all_items(self):
+    def test_index_displays_all_items(self):
         response = self.client.get(reverse_lazy('enterprises:index'))
 
         self.assertContains(response, 'enterprise1')
@@ -47,17 +47,17 @@ class DetailsPageTest(TestCase):
 
         self.assertEqual(response.status_code, 200)
 
-    def test_enterprises_details_url_resolves_to_details_view(self):
+    def test_resolve_details_page(self):
         found = resolve(reverse_lazy('enterprises:details', kwargs={'pk': 1}))
 
         self.assertEqual(found.func, details)
 
-    def test_enterprises_details_url_uses_correct_url(self):
+    def test_details_uses_correct_template(self):
         response = self.client.get(reverse_lazy('enterprises:details', kwargs={'pk': 1}))
 
         self.assertTemplateUsed(response, 'enterprises/details.html')
 
-    def test_enterprises_details_contains_enterprise_name(self):
+    def test_details_contains_enterprise_name(self):
         response1 = self.client.get(reverse_lazy('enterprises:details', kwargs={'pk': 1}))
         response2 = self.client.get(reverse_lazy('enterprises:details', kwargs={'pk': 2}))
 
