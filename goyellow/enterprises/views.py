@@ -14,4 +14,6 @@ def enterprises_list(request):
 
 
 def details(request, enterprise_id):
-    return render(request, 'enterprises/details.html')
+    enterprise = Enterprise.objects.get(pk = enterprise_id)
+    context = {'enterprise' : enterprise,}
+    return render(request, 'enterprises/details.html', context)
