@@ -36,7 +36,7 @@ class IndexPageTest(TestCase):
     def test_index_uses_correct_template(self):
         response = self.client.get(reverse_lazy('enterprises:index'))
 
-        self.assertTemplateUsed(response, 'enterprises/enterprises.html')
+        self.assertTemplateUsed(response, 'enterprises/enterprise_list.html')
 
     def test_index_displays_all_items(self):
         response = self.client.get(reverse_lazy('enterprises:index'))
@@ -58,15 +58,10 @@ class DetailsPageTest(TestCase):
 
         self.assertEqual(response.status_code, 200)
 
-    def test_resolve_details_page(self):
-        found = resolve(reverse_lazy('enterprises:details', kwargs={'pk': 1}))
-
-        self.assertEqual(found.func, details)
-
     def test_details_uses_correct_template(self):
         response = self.client.get(reverse_lazy('enterprises:details', kwargs={'pk': 1}))
 
-        self.assertTemplateUsed(response, 'enterprises/details.html')
+        self.assertTemplateUsed(response, 'enterprises/enterprise_detail.html')
 
     def test_details_contains_enterprise_name(self):
         response1 = self.client.get(reverse_lazy('enterprises:details', kwargs={'pk': 1}))
