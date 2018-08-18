@@ -1,10 +1,8 @@
 from django.urls import resolve
 from django.urls import reverse_lazy
 from django.test import TestCase
-from unittest import skip
 
 from ..views import home_page
-from ..views import details
 from ..models import Enterprise
 
 

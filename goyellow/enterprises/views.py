@@ -19,11 +19,6 @@ class EnterpriseListView(generic.ListView):
 class EnterpriseDetailsView(generic.DetailView):
     model = Enterprise
 
-def details(request, pk):
-    enterprise = get_object_or_404(Enterprise, pk=pk)
-    context = {'enterprise' : enterprise,}
-    return render(request, 'enterprises/enterprise_detail.html', context)
-
 
 def new_enterprise(request):
     if request.method == 'POST':
