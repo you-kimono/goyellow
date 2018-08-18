@@ -22,4 +22,7 @@ def details(request, pk):
 
 
 def new_enterprise(request):
-    return HttpResponse()
+    if request.method == 'POST':
+        name = request.POST['enterprise_name']
+        Enterprise.objects.create(name=name)
+    return render(request, 'enterprises/new.html')

@@ -1,8 +1,10 @@
 from django.urls import resolve
 from django.urls import reverse_lazy
 from django.test import TestCase
-from enterprises.views import home_page
-from enterprises.views import details
+from unittest import skip
+
+from ..views import home_page
+from ..views import details
 from ..models import Enterprise
 
 
@@ -18,7 +20,7 @@ class HomePageTest(TestCase):
         self.assertTemplateUsed(response, 'enterprises/home.html')
 
 
-class DetailsPageTest(TestCase):
+class IndexPageTest(TestCase):
 
     def setUp(self):
         self.name1 = 'enterprise1'
@@ -41,6 +43,15 @@ class DetailsPageTest(TestCase):
 
         self.assertContains(response, 'enterprise1')
         self.assertContains(response, 'enterprise2')
+
+
+class DetailsPageTest(TestCase):
+
+    def setUp(self):
+        self.name1 = 'enterprise1'
+        self.name2 = 'enterprise2'
+        Enterprise.objects.create(name=self.name1)
+        Enterprise.objects.create(name=self.name2)
 
     def test_resolve_enterprises_details_page(self):
         response = self.client.get(reverse_lazy('enterprises:details', kwargs={'pk' : 1}))
@@ -69,7 +80,35 @@ class DetailsPageTest(TestCase):
 
         self.assertEqual(response.status_code, 404)
 
+
+class NewEnterprisePage(TestCase):
+
     def test_resolve_new_page(self):
         response = self.client.get(reverse_lazy('enterprises:new'))
 
         self.assertEqual(response.status_code, 200)
+
+    def test_new_uses_correct_template(self):
+        response = self.client.get(reverse_lazy('enterprises:new'))
+
+        self.assertTemplateUsed(response, 'enterprises/new.html')
+
+    def test_new_can_save_a_POST_request(self):
+        response = self.client.post(
+            reverse_lazy('enterprises:new'),
+            data={
+                'enterprise_name':'my_new_enterprise'
+            }
+        )
+        enterprises = Enterprise.objects.all()
+        self.assertEqual(enterprises.count(), 1)
+
+    def test_new_enterprise_has_expected_name(self):
+        response = self.client.post(
+            reverse_lazy('enterprises:new'),
+            data={
+                'enterprise_name': 'my_new_enterprise'
+            }
+        )
+        enterprise = Enterprise.objects.first()
+        self.assertEqual(enterprise.name, 'my_new_enterprise')
