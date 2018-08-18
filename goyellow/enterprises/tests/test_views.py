@@ -68,3 +68,8 @@ class DetailsPageTest(TestCase):
         response = self.client.get(reverse_lazy('enterprises:details', kwargs={'pk': 3}))
 
         self.assertEqual(response.status_code, 404)
+
+    def test_resolve_new_page(self):
+        response = self.client.get(reverse_lazy('enterprises:new'))
+
+        self.assertEqual(response.status_code, 200)

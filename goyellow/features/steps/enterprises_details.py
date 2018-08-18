@@ -27,12 +27,12 @@ def step_impl(context, enterprise_name):
     tc.assertEqual(enterprise_name, element.text)
 
 
-
 @when('I access the details of a non-existing enterprise')
 def step_impl(context):
     context.browser.get(
         'http://localhost:8000/enterprises/3'
     )
+
 
 @then('I receive a response of 404')
 def step_impl(context):
