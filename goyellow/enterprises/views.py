@@ -7,7 +7,7 @@ def home_page(request):
     return render(request, 'enterprises/home.html')
 
 
-def enterprises_list(request):
+def index(request):
     enterprises = Enterprise.objects.all()
     context = {'enterprises' : enterprises, }
     return render(request, 'enterprises/enterprises.html', context)
