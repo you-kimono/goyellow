@@ -1,7 +1,6 @@
 from behave import *
 from selenium.webdriver.common.keys import Keys
 import unittest
-import time
 
 
 @given('there is a set of enterprises')
@@ -11,7 +10,6 @@ def step_impl(context):
         inputbox = context.browser.find_element_by_id('id_enterprise_name')
         inputbox.send_keys(enterprise['enterprise_name'])
         inputbox.send_keys(Keys.RETURN)
-        time.sleep(4)
     pass
 
 

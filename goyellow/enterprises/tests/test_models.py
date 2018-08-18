@@ -23,7 +23,12 @@ class EnterpriseModelTest(TestCase):
         self.assertEqual(first_saved_enterprise.enterprise_name, 'first_enterprise')
         self.assertEqual(second_saved_enterprise.enterprise_name, 'second_enterprise')
 
-    def test_name_label(self):
+    def test_enterprise_name_label(self):
         enterprise = Enterprise.objects.create(enterprise_name='enterprise_name')
         field_label = enterprise._meta.get_field('enterprise_name').verbose_name
         self.assertEquals(field_label, 'enterprise name')
+
+    def test_enterprise_name_max_length(self):
+        enterprise = Enterprise.objects.create(enterprise_name='enterprise_name')
+        max_length = enterprise._meta.get_field('enterprise_name').max_length
+        self.assertEquals(max_length, 100)
