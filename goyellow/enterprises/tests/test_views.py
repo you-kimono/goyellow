@@ -88,9 +88,19 @@ class NewEnterprisePage(TestCase):
 
         self.assertEqual(response.status_code, 200)
 
-    def test_new_uses_correct_template(self):
+    def test_new_uses_correct_template_after_GET(self):
         response = self.client.get(reverse_lazy('enterprises:new'))
 
+        self.assertTemplateUsed(response, 'enterprises/new.html')
+
+    @skip
+    def test_new_uses_correct_template_after_POST(self):
+        response = self.client.post(
+            reverse_lazy('enterprises:new'),
+            data={
+                'enterprise_name': 'my_new_enterprise'
+            }
+        )
         self.assertTemplateUsed(response, 'enterprises/new.html')
 
     def test_new_can_save_a_POST_request(self):
@@ -119,3 +129,13 @@ class NewEnterprisePage(TestCase):
         )
         enterprise = Enterprise.objects.first()
         self.assertEqual(enterprise.name, 'my_new_enterprise')
+
+    def test_new_redirects_after_POST(self):
+        response = self.client.post(
+            reverse_lazy('enterprises:new'),
+            data={
+                'enterprise_name': 'my_new_enterprise'
+            }
+        )
+
+        self.assertEqual(response.status_code, 302)

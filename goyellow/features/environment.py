@@ -1,4 +1,5 @@
 from selenium import webdriver
+from django.core import management
 
 
 def before_all(context):

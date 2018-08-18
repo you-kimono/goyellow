@@ -1,14 +1,17 @@
 from behave import *
+from selenium.webdriver.common.keys import Keys
 import unittest
+import time
 
 
 @given('there is a set of enterprises')
 def step_impl(context):
     for enterprise in context.table:
-        # db_enterprise = Enterprise()
-        # db_enterprise.name = enterprise.name
-        # db_enterprise.save()
-        pass
+        context.browser.get('http://localhost:8000/enterprises/new')
+        inputbox = context.browser.find_element_by_id('id_enterprise_name')
+        inputbox.send_keys(enterprise['enterprise_name'])
+        inputbox.send_keys(Keys.RETURN)
+        time.sleep(4)
     pass
 
 
@@ -30,7 +33,7 @@ def step_impl(context, enterprise_name):
 @when('I access the details of a non-existing enterprise')
 def step_impl(context):
     context.browser.get(
-        'http://localhost:8000/enterprises/3'
+        'http://localhost:8000/enterprises/666'
     )
 
 

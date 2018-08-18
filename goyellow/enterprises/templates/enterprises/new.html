@@ -5,6 +5,9 @@
     <title>New Enterprise</title>
 </head>
 <body>
-
+    <form id="new_enterprise_form" method="post">
+        <input id="id_enterprise_name" name="enterprise_name" placeholder="Enter the enterprise name" />
+        {% csrf_token %}
+    </form>
 </body>
 </html>

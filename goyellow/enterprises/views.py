@@ -1,6 +1,8 @@
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
 from .models import Enterprise
 
 
@@ -25,4 +27,5 @@ def new_enterprise(request):
     if request.method == 'POST':
         name = request.POST['enterprise_name']
         Enterprise.objects.create(name=name)
+        return HttpResponseRedirect(reverse_lazy('enterprises:new'))
     return render(request, 'enterprises/new.html')
