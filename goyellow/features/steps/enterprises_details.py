@@ -10,7 +10,7 @@ def step_impl(context):
 
 @when('I access the details page of the enterprise with id "{enterprise_id}"')
 def step_impl(context, enterprise_id):
-    context.response = context.test.client.get('http://localhost:8000/enterprises/' + str(enterprise_id) + '/')
+    context.response = context.test.client.get(context.test.live_server_url + '/enterprises/' + str(enterprise_id) + '/')
 
 
 @then('the details page contains the name "{enterprise_name}"')
@@ -21,10 +21,10 @@ def step_impl(context, enterprise_name):
 @when('I access the details of a non-existing enterprise')
 def step_impl(context):
     context.browser.get(
-        'http://localhost:8000/enterprises/666/'
+        context.test.live_server_url + '/enterprises/666/'
     )
 
 
 @then('I receive a response of 404')
 def step_impl(context):
-    assert 'Page not found' in context.browser.title
+    context.test.assertIn('Not Found', context.browser.page_source)

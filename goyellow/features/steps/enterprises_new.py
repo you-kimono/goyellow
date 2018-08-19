@@ -11,7 +11,7 @@ def step_impl(context):
 @when('I access the create new enterprise page')
 def step_impl(context):
     context.browser.get(
-        'http://localhost:8000/enterprises/new/'
+        context.test.live_server_url + '/enterprises/new/'
     )
 
 

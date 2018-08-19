@@ -8,7 +8,7 @@ def step_impl(context):
 
 @when('we open the homepage')
 def step_impl(context):
-    context.browser.get('http://localhost:8000')
+    context.browser.get(context.test.live_server_url)
 
 
 @then('the title contains "{text}"')
