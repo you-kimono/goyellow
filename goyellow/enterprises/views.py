@@ -14,6 +14,8 @@ def home_page(request):
 
 class EnterpriseListView(generic.ListView):
     model = Enterprise
+    paginate_by = 10
+    ordering = ['-id']
 
 
 class EnterpriseDetailsView(generic.DetailView):

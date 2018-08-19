@@ -18,29 +18,44 @@ class HomePageTest(TestCase):
         self.assertTemplateUsed(response, 'enterprises/home.html')
 
 
-class IndexPageTest(TestCase):
+class EnterpriseListViewTest(TestCase):
 
-    def setUp(self):
-        self.name1 = 'enterprise1'
-        self.name2 = 'enterprise2'
-        Enterprise.objects.create(enterprise_name=self.name1)
-        Enterprise.objects.create(enterprise_name=self.name2)
+    @classmethod
+    def setUpTestData(cls):
+        number_of_enterprises = 14
+        for enterprise_id in range(number_of_enterprises):
+            Enterprise.objects.create(enterprise_name='enterprise' + str(enterprise_id))
 
-    def test_resolve_index_page(self):
+    def test_resolve_enterprise_list_page(self):
         response = self.client.get(reverse_lazy('enterprises:index'))
-
         self.assertEqual(response.status_code, 200)
 
-    def test_index_uses_correct_template(self):
+    def test_view_url_accessible_by_name(self):
         response = self.client.get(reverse_lazy('enterprises:index'))
+        self.assertEqual(response.status_code, 200)
 
+    def test_enterprise_list_uses_correct_template(self):
+        response = self.client.get(reverse_lazy('enterprises:index'))
         self.assertTemplateUsed(response, 'enterprises/enterprise_list.html')
 
-    def test_index_displays_all_items(self):
+    def test_enterprise_list_displays_all_items(self):
         response = self.client.get(reverse_lazy('enterprises:index'))
 
-        self.assertContains(response, 'enterprise1')
-        self.assertContains(response, 'enterprise2')
+        self.assertContains(response, 'enterprise13')
+        self.assertContains(response, 'enterprise12')
+
+    def test_pagination_is_ten(self):
+        response = self.client.get(reverse_lazy('enterprises:index'))
+        self.assertTrue('is_paginated' in response.context)
+        self.assertTrue(response.context['is_paginated'])
+        self.assertEqual(len(response.context['enterprise_list']), 10)
+
+    def test_lists_all_enterprises(self):
+        response = self.client.get(reverse_lazy('enterprises:index')+'?page=2')
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue('is_paginated' in response.context)
+        self.assertTrue(response.context['is_paginated'])
+        self.assertEqual(len(response.context['enterprise_list']), 4)
 
 
 class DetailsPageTest(TestCase):
