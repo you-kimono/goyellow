@@ -1,5 +1,6 @@
 from behave import *
 from selenium.webdriver.common.by import By
+import time
 
 
 @given('I am logged in')
@@ -16,5 +17,6 @@ def step_impl(context):
 
 @then('I see a form where I can enter the enterprise info')
 def step_impl(context):
+    time.sleep(1)
     element = context.browser.find_element(By.ID, 'new_enterprise_form')
     assert element is not None
