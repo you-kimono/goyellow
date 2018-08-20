@@ -2,6 +2,7 @@
 
 {% block header_text %}Enterprises in the database{% endblock %}
 {% block contents %}
+    <div id="id_enterprise_list">
     {% if enterprise_list %}
         {% for enterprise in enterprise_list %}
             <li>{{enterprise.enterprise_name}}</li>
@@ -9,4 +10,5 @@
     {% else %}
         No enterprises available
     {% endif %}
+    </div>
 {% endblock %}

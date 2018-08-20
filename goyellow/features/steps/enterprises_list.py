@@ -1,5 +1,5 @@
 from behave import *
-import time
+from features.behave_utilities import *
 
 
 @given('there are no enterprises')
@@ -12,17 +12,19 @@ def step_impl(context):
     context.browser.get(
         context.test.live_server_url + '/enterprises/'
     )
-    time.sleep(3)
 
 
 @then('I see the message "{message}"')
 def step_impl(context, message):
-    context.test.assertIn(message, context.browser.page_source)
+    wait_for(lambda: context.test.assertEqual(
+        context.browser.find_element_by_id('id_enterprise_list').text,
+        message
+    ))
 
 
 @then('I see the list of enterprises contains "{enterprise_name}"')
 def step_impl(context, enterprise_name):
-    context.test.assertIn(
+    wait_for(lambda: context.test.assertIn(
         enterprise_name,
-        context.browser.page_source
-    )
+        context.browser.find_element_by_id('id_enterprise_list').text
+    ))
