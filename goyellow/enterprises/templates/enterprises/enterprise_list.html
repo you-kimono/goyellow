@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Enterprises</title>
-</head>
-<body>
-    <ul>
-        {% for enterprise in enterprise_list %}
-            <li>{{enterprise.enterprise_name}}</li>
-        {% endfor %}
+{% extends 'enterprises/base.html' %}
 
-    </ul>
-</body>
-</html>
+{% block header_text %}Enterprises in the database{% endblock %}
+{% block contents %}
+    {% for enterprise in enterprise_list %}
+        <li>{{enterprise.enterprise_name}}</li>
+    {% endfor %}
+{% endblock %}

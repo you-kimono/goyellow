@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>New Enterprise</title>
-</head>
-<body>
+{% extends 'enterprises/base.html' %}
+
+{% block header_text %}Create an enterprise{% endblock %}
+{% block contents %}
     <form id="new_enterprise_form" method="post">
         <input id="id_enterprise_name" name="enterprise_name" placeholder="Enter the enterprise name" />
         {% csrf_token %}
     </form>
-</body>
-</html>
+{% endblock %}

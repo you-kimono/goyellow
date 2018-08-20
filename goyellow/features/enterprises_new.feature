@@ -1,5 +1,10 @@
 Feature: Add a new enterprise.
 
+  Scenario: the enterprise lists page is styled
+    Given no preconditions
+    when I access the create new enterprise page
+    then I see that the inputbox is centered
+
   Scenario: A user accesses the create new enterprise page
     Given I am logged in
     when I access the create new enterprise page

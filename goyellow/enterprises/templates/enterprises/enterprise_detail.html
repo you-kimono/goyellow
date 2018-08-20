@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'enterprises/base.html' %}
+
+{% block header_text %}Details:{% endblock %}
+{% block contents %}
     <div id="enterprise_name">{{ enterprise.enterprise_name }}</div>
-</body>
-</html>
+{% endblock %}
