@@ -1,6 +1,6 @@
 Feature: Add a new enterprise.
 
-  Scenario: the enterprise lists page is styled
+  Scenario: the new enterprise page is styled
     Given no preconditions
     when I access the create new enterprise page
     then I see that the inputbox is centered

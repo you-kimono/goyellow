@@ -2,7 +2,11 @@
 
 {% block header_text %}Enterprises in the database{% endblock %}
 {% block contents %}
-    {% for enterprise in enterprise_list %}
-        <li>{{enterprise.enterprise_name}}</li>
-    {% endfor %}
+    {% if enterprise_list %}
+        {% for enterprise in enterprise_list %}
+            <li>{{enterprise.enterprise_name}}</li>
+        {% endfor %}
+    {% else %}
+        No enterprises available
+    {% endif %}
 {% endblock %}
