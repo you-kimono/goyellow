@@ -13,5 +13,9 @@ Feature: Add a new enterprise.
   Scenario: A user creates a new enterprise page
     Given I am logged in
     when I access the create new enterprise page
-    and I compile the form with name "new_enterprise" and press submit
-    then the a new enterprise with name "new_enterprise" is created
+    and I compile the form with name "new_enterprise"
+    and I compile the form with address "new_address"
+    and I press submit
+    then a new enterprise is created
+    and the enterprise has name "new_enterprise"
+    and the enterprise has address "new_address"

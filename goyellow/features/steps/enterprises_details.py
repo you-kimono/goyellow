@@ -5,7 +5,10 @@ from enterprises.models import Enterprise
 @given('there is a set of enterprises')
 def step_impl(context):
     for enterprise in context.table:
-        Enterprise.objects.create(enterprise_name=enterprise['enterprise_name'])
+        Enterprise.objects.create(
+            enterprise_name=enterprise['enterprise_name'],
+            enterprise_address=enterprise['enterprise_address']
+        )
 
 
 @when('I access the details page of the enterprise with id "{enterprise_id}"')
@@ -16,6 +19,11 @@ def step_impl(context, enterprise_id):
 @then('the details page contains the name "{enterprise_name}"')
 def step_impl(context, enterprise_name):
     context.test.assertContains(context.response, enterprise_name)
+
+
+@then('the details page contains the address "{enterprise_address}"')
+def step_impl(context, enterprise_address):
+    context.test.assertContains(context.response, enterprise_address)
 
 
 @when('I access the details of a non-existing enterprise')

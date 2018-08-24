@@ -25,21 +25,57 @@ def step_impl(context):
     ))
 
 
-@when('I compile the form with name "{enterprise_name}" and press submit')
+@when('I compile the form with name "{enterprise_name}"')
 def step_impl(context, enterprise_name):
     wait_for(lambda: context.browser.find_element(By.ID, 'id_enterprise_name'))
 
     element = context.browser.find_element(By.ID, 'id_enterprise_name')
     element.send_keys(enterprise_name)
+    #element.send_keys(Keys.RETURN)
+
+
+@when('I compile the form with address "{enterprise_address}"')
+def step_impl(context, enterprise_address):
+    wait_for(lambda: context.browser.find_element(By.ID, 'id_enterprise_address'))
+
+    element = context.browser.find_element(By.ID, 'id_enterprise_address')
+    element.send_keys(enterprise_address)
+    #element.send_keys(Keys.RETURN)
+
+
+@when('I press submit')
+def step_impl(context):
+    wait_for(lambda: context.browser.find_element(By.ID, 'id_submit_button'))
+
+    element = context.browser.find_element(By.ID, 'id_submit_button')
     element.send_keys(Keys.RETURN)
 
 
-@then('the a new enterprise with name "{enterprise_name}" is created')
+@then('a new enterprise is created')
+def step_impl(context):
+    time.sleep(1)
+    wait_for_database_update(
+        lambda: context.test.assertEqual(
+            Enterprise.objects.all().count(),
+            1
+        ))
+
+
+@then('the enterprise has name "{enterprise_name}"')
 def step_impl(context, enterprise_name):
     wait_for_database_update(
         lambda: context.test.assertEqual(
             Enterprise.objects.first().enterprise_name,
             enterprise_name
+        ))
+
+
+@then('the enterprise has address "{enterprise_address}"')
+def step_impl(context, enterprise_address):
+    wait_for_database_update(
+        lambda: context.test.assertEqual(
+            Enterprise.objects.first().enterprise_address,
+            enterprise_address
         ))
 
 

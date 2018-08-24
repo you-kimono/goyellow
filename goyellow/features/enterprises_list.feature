@@ -7,9 +7,9 @@ Feature: Show the list of enterprises in the system.
 
   Scenario: A list of enterprises is displayed if there are enterprises
     Given there is a set of enterprises
-        |   enterprise_name             | enterprise_id     |
-        |   test_enterprise             | 1                 |
-        |   another_test_enterprise     | 4                 |
+        |   enterprise_name             | enterprise_id     | enterprise_address            |
+        |   test_enterprise             | 1                 | enterprise road               |
+        |   another_test_enterprise     | 4                 | enterprise avenue             |
     when I access the enterprise list page
     then I see the list of enterprises contains "test_enterprise"
     and I see the list of enterprises contains "another_test_enterprise"

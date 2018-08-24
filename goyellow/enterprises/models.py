@@ -7,3 +7,7 @@ class Enterprise(models.Model):
         max_length=100,
         default=''
     )
+    enterprise_address = models.CharField(
+        max_length=100,
+        default=''
+    )

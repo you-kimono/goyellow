@@ -3,7 +3,14 @@
 {% block header_text %}Create an enterprise{% endblock %}
 {% block contents %}
     <form id="new_enterprise_form" method="post">
-        <input id="id_enterprise_name" name="enterprise_name" placeholder="Enter the enterprise name" />
+        <p>
+        <input id="id_enterprise_name" name="enterprise_name" placeholder="Enter the enterprise name" >
+            </p>
+        <p>
+        <input id="id_enterprise_address" name="enterprise_address" placeholder="Enter the enterprise address" >
+        </p>
+        <input id="id_submit_button" type="submit" value="Submit" >
+        </p>
         {% csrf_token %}
     </form>
 {% endblock %}

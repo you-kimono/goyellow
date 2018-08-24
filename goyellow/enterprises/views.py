@@ -25,8 +25,10 @@ class EnterpriseDetailsView(generic.DetailView):
 def new_enterprise(request):
     if request.method == 'POST':
         enterprise_name = request.POST['enterprise_name']
+        enterprise_address = request.POST['enterprise_address']
         enterprise = Enterprise()
         enterprise.enterprise_name = enterprise_name
+        enterprise.enterprise_address = enterprise_address
         enterprise.save()
-        return HttpResponseRedirect(reverse_lazy('enterprises:details', kwargs={'pk':enterprise.id}))
+        return HttpResponseRedirect(reverse_lazy('enterprises:details', kwargs={'pk': enterprise.id}))
     return render(request, 'enterprises/new.html')

@@ -63,8 +63,16 @@ class DetailsPageTest(TestCase):
     def setUp(self):
         self.name1 = 'enterprise1'
         self.name2 = 'enterprise2'
-        Enterprise.objects.create(enterprise_name=self.name1)
-        Enterprise.objects.create(enterprise_name=self.name2)
+        self.address1 = 'enterprise_address1'
+        self.address2 = 'enterprise_address2'
+        Enterprise.objects.create(
+            enterprise_name=self.name1,
+            enterprise_address=self.address1
+        )
+        Enterprise.objects.create(
+            enterprise_name=self.name2,
+            enterprise_address=self.address2
+        )
 
     def test_resolve_enterprises_details_page(self):
         response = self.client.get(reverse_lazy('enterprises:details', kwargs={'pk' : 1}))
@@ -105,23 +113,25 @@ class NewEnterprisePage(TestCase):
         response = self.client.post(
             reverse_lazy('enterprises:new'),
             data={
-                'enterprise_name': 'my_new_enterprise'
+                'enterprise_name': 'my_new_enterprise',
+                'enterprise_address': 'my_new_address'
             }
         )
         self.assertEqual(response['location'], '/enterprises/1/')
 
     def test_new_can_save_a_POST_request(self):
-        response = self.client.post(
+        self.client.post(
             reverse_lazy('enterprises:new'),
             data={
-                'enterprise_name':'my_new_enterprise'
+                'enterprise_name': 'my_new_enterprise',
+                'enterprise_address': 'my_new_address'
             }
         )
         enterprises = Enterprise.objects.all()
         self.assertEqual(enterprises.count(), 1)
 
     def test_new_does_not_save_a_GET_request(self):
-        response = self.client.get(
+        self.client.get(
             reverse_lazy('enterprises:new')
         )
         enterprises = Enterprise.objects.all()
@@ -131,17 +141,30 @@ class NewEnterprisePage(TestCase):
         response = self.client.post(
             reverse_lazy('enterprises:new'),
             data={
-                'enterprise_name': 'my_new_enterprise'
+                'enterprise_name': 'my_new_enterprise',
+                'enterprise_address': 'my_new_address'
             }
         )
         enterprise = Enterprise.objects.first()
         self.assertEqual(enterprise.enterprise_name, 'my_new_enterprise')
 
+    def test_new_enterprise_has_expected_address(self):
+        self.client.post(
+            reverse_lazy('enterprises:new'),
+            data={
+                'enterprise_name': 'my_new_enterprise',
+                'enterprise_address': 'my_new_address'
+            }
+        )
+        enterprise = Enterprise.objects.first()
+        self.assertEqual(enterprise.enterprise_address, 'my_new_address')
+
     def test_new_redirects_after_POST(self):
         response = self.client.post(
             reverse_lazy('enterprises:new'),
             data={
-                'enterprise_name': 'my_new_enterprise'
+                'enterprise_name': 'my_new_enterprise',
+                'enterprise_address': 'my_new_address'
             }
         )
 

@@ -20,7 +20,7 @@ def wait_for_database_update(fun):
     while True:
         try:
             return fun()
-        except (AttributeError) as e:
+        except AttributeError as e:
             if time.time() - start_time > MAX_WAIT:
                 raise e
             time.sleep(0.5)
